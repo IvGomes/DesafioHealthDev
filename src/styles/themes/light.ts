@@ -18,7 +18,7 @@ export default {
         iconsHover: "#DFDFDF",
 
         avatarBorderColor: "rgba(1, 167, 204, 0.1)",
-        avataPreviewBorder: "#DEDEDE",
+        avatarPreviewBorder: "#DEDEDE",
 
         statusOnline: "#0F0",
         statusOffline: "#F00",
