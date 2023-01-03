@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 interface StyledDragAndDropInputsProps {
   isDragActive: boolean
@@ -11,7 +11,11 @@ export const Container = styled.div<StyledDragAndDropInputsProps>`
   border-radius: 4px;
 `
 
-export const Label = styled.label`
+interface LabelStyledProps {
+  disabled: boolean
+}
+
+export const Label = styled.label<LabelStyledProps>`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -19,6 +23,13 @@ export const Label = styled.label`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      background-color: ${(props) => props.theme.colors.disabledInputs};
+      cursor: not-allowed;
+    `}
 `
 
 export const Text = styled.p`
@@ -35,7 +46,7 @@ export const Text = styled.p`
 
 export const DropOverlay = styled.div`
   position: fixed;
-  background-color: rgba(0,0,0, .2);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 100%;
   top: 0px;

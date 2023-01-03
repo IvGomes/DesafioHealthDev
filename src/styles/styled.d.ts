@@ -33,6 +33,7 @@ declare module 'styled-components' {
 
         focusInput: string;
         borderInputs: string;
+        disabledInputs: string;
 
         switchInativeBg: string;
         switchInativeBorder: string;

@@ -47,4 +47,9 @@ export const Input = styled.input<InputStyledProps>`
         border: 1px solid ${props => props.theme.colors.focusInput};
         outline-color: ${props => props.theme.colors.focusInput};
     }
+
+    :disabled {
+        background-color: ${props => props.theme.colors.disabledInputs};
+        cursor: not-allowed
+    }
 `

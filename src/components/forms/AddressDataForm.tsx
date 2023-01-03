@@ -6,12 +6,12 @@ import { Label } from "../Label";
 import { SelectInput } from "../SelectInput";
 import { TitleForm } from "../TitleForm";
 
-import * as api from './../../services/districtsRequest'
-
 import * as StyledForms from './../../styles/components/forms/FormsCommon';
 
 
 export function AddressDataForm() {
+    const { setAddressFormData, addressFormData, getValuesOnStorage } = useGlobalContext();
+
     const {
         getUfsAddress,
         ufs,
@@ -23,6 +23,17 @@ export function AddressDataForm() {
 
     useEffect(() => {
         getUfsAddress()
+    }, [])
+
+    const handlePersistFormData = (name: any, value: any) => {
+        setAddressFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
+
+    useEffect(() => {
+        getValuesOnStorage()
     }, [])
 
 
@@ -39,17 +50,44 @@ export function AddressDataForm() {
             <StyledForms.RowLabelInputGroup>
                 <Label title="UF / Municipio de residência" />
                 <StyledForms.InputsGroup templateColumns="1fr 1fr">
-                    <SelectInput selectItensValues={ufs} handles={handleUfSelectOnChange} />
-                    <SelectInput selectItensValues={municipios} handles={handleMunicipioSelectOnChange} />
+                    <SelectInput
+                        inputName="uf"
+                        selectItensValues={ufs}
+                        handles={handleUfSelectOnChange}
+                        initValue={addressFormData.uf}
+                        getValue={handlePersistFormData}
+                    />
+                    <SelectInput
+                        inputName="municipio"
+                        selectItensValues={municipios}
+                        handles={handleMunicipioSelectOnChange}
+                        initValue={addressFormData.municipio}
+                        getValue={handlePersistFormData}
+                    />
                 </StyledForms.InputsGroup>
             </StyledForms.RowLabelInputGroup>
 
             <StyledForms.RowLabelInputGroup>
                 <Label title="Logradouro / Número / Bairro" />
                 <StyledForms.InputsGroup templateColumns="1fr 1fr 1fr">
-                    <Input placeholder={"Rua padre alfredo nesi"} />
-                    <Input placeholder={"Numero ou S/N"} />
-                    <Input placeholder={"Bairro"} />
+                    <Input
+                        name="logradouro"
+                        placeholder={"Rua padre alfredo nesi"}
+                        value={addressFormData.logradouro}
+                        onChange={(e) => handlePersistFormData(e.target.name, e.target.value)}
+                    />
+                    <Input
+                        name="numero"
+                        placeholder={"Numero ou S/N"}
+                        value={addressFormData.numero}
+                        onChange={(e) => handlePersistFormData(e.target.name, e.target.value)}
+                    />
+                    <Input
+                        name="bairro"
+                        placeholder={"Bairro"}
+                        value={addressFormData.bairro}
+                        onChange={(e) => handlePersistFormData(e.target.name, e.target.value)}
+                    />
                 </StyledForms.InputsGroup>
             </StyledForms.RowLabelInputGroup>
 
@@ -58,7 +96,12 @@ export function AddressDataForm() {
                     title="Complemento"
                 />
                 <StyledForms.InputsGroup templateColumns="1fr">
-                    <Input placeholder="Apt 4" />
+                    <Input
+                        name="complemento"
+                        placeholder="Apt 4"
+                        value={addressFormData.complemento}
+                        onChange={(e) => handlePersistFormData(e.target.name, e.target.value)}
+                    />
                 </StyledForms.InputsGroup>
             </StyledForms.RowLabelInputGroup>
         </form>

@@ -3,15 +3,21 @@ import { useEffect, useState } from 'react';
 import * as Styled from './../styles/components/SelectInput';
 
 import { Icons } from "./../components/Icons";
+import { useGlobalContext } from '../context/GlobalContext';
 
 interface SelectInputProps {
+    inputName: string;
     selectItensValues: string[];
     handles?: any;
+    getValue: (name: any, value: any) => void;
+    initValue?: string;
 }
 
-export function SelectInput({ selectItensValues, handles }: SelectInputProps) {
+export function SelectInput({ inputName, selectItensValues, handles, getValue, initValue }: SelectInputProps) {
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState("Selecionar");
+    const [value, setValue] = useState(initValue);
+
+    const { onViewModeInput, generalFormData, addressFormData } = useGlobalContext();
 
     if (handles) {
         useEffect(() => {
@@ -19,12 +25,22 @@ export function SelectInput({ selectItensValues, handles }: SelectInputProps) {
         }, [value])
     }
 
+    useEffect(() => {
+        getValue(inputName, value);
+    }, [value])
+
+    useEffect(() => {
+        setValue(initValue)
+    }, [generalFormData, addressFormData])
+
     return (
         <Styled.SelectRoot
+            name={inputName}
             open={open}
             onOpenChange={setOpen}
             value={value}
             onValueChange={setValue}
+            disabled={onViewModeInput}
         >
             <Styled.SelectTrigger isOpen={open}>
                 <Styled.SelectValue>

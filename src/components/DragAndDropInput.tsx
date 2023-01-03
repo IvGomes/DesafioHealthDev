@@ -1,3 +1,4 @@
+import { useGlobalContext } from '../context/GlobalContext';
 import * as Styled from './../styles/components/DragAndDropInput';
 
 import { Icons } from './Icons';
@@ -13,11 +14,12 @@ interface DragAndDropInputProps {
 }
 
 export function DragAndDropInput({ isDragActive, handles }: DragAndDropInputProps) {
+  const {onViewModeInput} = useGlobalContext();
 
   return (
     <Styled.Container isDragActive={isDragActive}>
-      <input hidden type="file" id="input-file-upload" multiple={true} />
-      <Styled.Label id="label-file-upload" htmlFor="input-file-upload">
+      <input disabled={onViewModeInput} hidden type="file" id="input-file-upload" multiple={true} />
+      <Styled.Label disabled={onViewModeInput} id="label-file-upload" htmlFor="input-file-upload">
         <Icons.UploadFiles />
         <Styled.Text>
           <strong>Clique para fazer upload</strong> ou arraste e solte

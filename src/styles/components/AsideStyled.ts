@@ -19,7 +19,7 @@ export const Avatar = styled.div`
   display: flex;
   width: 32px;
   height: 32px;
-  margin: auto 16px 41px 0;
+  margin: 5px 16px 41px 0;
 `
 
 interface StatusUserProps {

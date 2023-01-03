@@ -28,6 +28,7 @@ export default {
 
         focusInput: "#01A7CC",
         borderInputs: "#DEDEDE",
+        disabledInputs: "#D2D2D2",
 
         switchInativeBg: "#D8D8D8",
         switchInativeBorder: "#B0B0B0",

@@ -9,7 +9,7 @@ import { OpenMenuButton } from "./OpenMenuButton";
 
 
 export function Aside() {
-    const { asideCollapse } = useGlobalContext();
+    const { asideCollapse, generalFormData, professionalFormData } = useGlobalContext();
 
     return (
         <aside>
@@ -26,8 +26,8 @@ export function Aside() {
                     <DropdownMenu
                         isCollapsed={asideCollapse}
                         onViewInfos={{
-                            title: "Ivan Gomes",
-                            subtitle: "Médico"
+                            title: generalFormData.fullName,
+                            subtitle: professionalFormData.especialidade
                         }}
                         contentOptions={[
                             { title: "Adicione outra conta", subtitle: "" }

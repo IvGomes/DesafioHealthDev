@@ -20,10 +20,14 @@ export const SelectTrigger = styled(Select.Trigger)<SelectProps>`
         ? props.theme.colors.focusInput
         : props.theme.colors.borderInputs};
   border-radius: 4px;
+
+  :disabled {
+    background-color: ${(props) => props.theme.colors.disabledInputs};
+    cursor: not-allowed;
+  }
 `
 
-export const SelectValue = styled(Select.Value)`
-`
+export const SelectValue = styled(Select.Value)``
 
 export const SelectIcon = styled(Select.Icon)<SelectProps>`
   path {

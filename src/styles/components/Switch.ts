@@ -24,6 +24,11 @@ export const SwitchRoot = styled(Switch.Root)<SwitchProps>`
       background-color: ${(props) => props.theme.colors.switchActiveBg};
       border: 1px solid ${(props) => props.theme.colors.switchActiveBorder};
     `}
+
+  :disabled {
+    background-color: ${(props) => props.theme.colors.disabledInputs};
+    cursor: not-allowed;
+  }
 `
 
 export const SwitchThumb = styled(Switch.Thumb)<SwitchProps>`
