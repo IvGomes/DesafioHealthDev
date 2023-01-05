@@ -1,7 +1,7 @@
 import { Input } from "../Input";
 import { Label } from "../Label";
 
-import * as Styled from './../../styles/components/forms/SigninForm';
+import * as Styled from '../../styles/components/forms/SignForms';
 
 export function SigninForm() {
     return (

@@ -1,4 +1,5 @@
-import * as Form from '../components/forms/SigninForm';
+import { SigninForm } from '../components/forms/SigninForm';
+import { SignupForm } from '../components/forms/SignupForm';
 import * as Styled from './../styles/pages/SigninupPage';
 
 export function SigninunPage() {
@@ -13,10 +14,10 @@ export function SigninunPage() {
                 </Styled.TabsTrigger>
             </Styled.TabsList>
             <Styled.TabsContent value="signin">
-                <Form.SigninForm />
+                <SigninForm />
             </Styled.TabsContent>
             <Styled.TabsContent value="signup">
-
+                <SignupForm />
             </Styled.TabsContent>
         </Styled.TabsRoot>
     )
