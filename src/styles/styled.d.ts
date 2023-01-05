@@ -18,6 +18,7 @@ declare module 'styled-components' {
 
         buttonFormsBg: string;
         buttonFormsText: string;
+        buttonFormsHover: string;
 
         icons: string;
         iconsHover: string;
@@ -41,6 +42,8 @@ declare module 'styled-components' {
         switchActiveBorder: string;
 
         divider: string;
+
+        shadow: string;
     }
   }
 }

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes } from "./";
 
 type Status = 'checking' | 'authenticated' | 'no-authenticated';
-const status: Status = 'authenticated';
+const status: Status = 'no-authenticated';
 
 export function AppRouter() {
 

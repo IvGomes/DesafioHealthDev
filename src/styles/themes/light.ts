@@ -13,6 +13,7 @@ export default {
 
         buttonFormsBg: "#01A7CC",
         buttonFormsText: "#FFFFFF",
+        buttonFormsHover: "#15b1d4",
 
         icons: "#909090",
         iconsHover: "#DFDFDF",
@@ -35,6 +36,8 @@ export default {
         switchActiveBg: "#01A7CC",
         switchActiveBorder: "#036980",
 
-        divider: "#DFDFDF"
+        divider: "#DFDFDF",
+
+        shadow: "rgba(0, 0, 0, 0.31)"
     }
 }
