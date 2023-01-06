@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @unique @default(uuid())
+  username String @unique
+  password String
+
+  GeneralData      GeneralData[]
+  AddressData      AddressData[]
+  ProfessionalData ProfessionalData[]
+
+  @@map("users")
+}
+
+model GeneralData {
+  id       String   @unique @default(uuid())
+  birth    DateTime
+  cns      String   @unique
+  cpf      String   @unique
+  email    String   @unique
+  fullName String
+  gender   String
+  phone    String   @unique
+  rg       String   @unique
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("generalDatas")
+}
+
+model AddressData {
+  id          String  @unique @default(uuid())
+  bairro      String
+  complemento String?
+  logradouro  String?
+  municipio   String
+  numero      String
+  uf          String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("addresses")
+}
+
+model ProfessionalData {
+  id             String  @unique @default(uuid())
+  crm            String
+  especialidade  String
+  idUser         String  @unique @default(cuid())
+  numeroConselho String  @unique
+  rqe            String
+  ufConselho     String
+  memed          Boolean
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("professionalDatas")
+}
