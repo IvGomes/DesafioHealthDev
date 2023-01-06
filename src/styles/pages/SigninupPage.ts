@@ -2,9 +2,19 @@ import * as Tabs from '@radix-ui/react-tabs'
 
 import styled from 'styled-components'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  position: absolute;
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`
 
-export const Header = styled.h1``
+export const Header = styled.h1`
+
+`
 
 export const TabsRoot = styled(Tabs.Root)`
   display: flex;
