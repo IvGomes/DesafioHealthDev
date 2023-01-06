@@ -5,9 +5,9 @@ import * as Styled from './../styles/pages/SigninupPage';
 export function SigninunPage() {
     return (
         <Styled.Container>
-            <Styled.Header>
+            <h1>
                 <img src='https://healthdev.io/wp-content/uploads/2021/11/cropped-logoHD-c.png' />
-            </Styled.Header>
+            </h1>
             <Styled.TabsRoot defaultValue="signin">
                 <Styled.TabsList>
                     <Styled.TabsTrigger value="signin">
