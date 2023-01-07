@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 import { PrivateRoutes, PublicRoutes } from "./";
 
-type Status = 'checking' | 'authenticated' | 'no-authenticated';
-const status: Status = 'no-authenticated';
 
 export function AppRouter() {
+    const {isLoading, isAuthenticated} = useAuthContext();
 
     if (status === 'checking') return <div className="loading">Checking credentials...</div>
 
@@ -12,7 +12,7 @@ export function AppRouter() {
         <BrowserRouter>
             <Routes>
                 {
-                    status === 'authenticated'
+                    isAuthenticated
                         ? <Route path='/*' element={<PrivateRoutes />} />
                         : <Route path='/*' element={<PublicRoutes />} />
                 }
