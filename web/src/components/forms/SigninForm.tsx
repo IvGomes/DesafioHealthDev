@@ -1,10 +1,9 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import { Input } from "../Input";
 import { Label } from "../Label";
 
 import * as Styled from '../../styles/components/forms/SignForms';
-import * as serverApi from "../../services/ServerApi";
 import { useAuthContext } from "../../context/AuthContext";
 
 export function SigninForm() {
@@ -15,7 +14,10 @@ export function SigninForm() {
         password: ""
     })
 
-    function handleSetValue(name: string, value: string) {
+    function handleSetValue(event: ChangeEvent<HTMLInputElement>) {
+        const name = event.target.name;
+        const value = event.target.value;
+        
         setSubmitData(prevState => ({
             ...prevState,
             [name]: value
@@ -30,7 +32,7 @@ export function SigninForm() {
                     name="username"
                     disabled={false}
                     value={submitData.username}
-                    onChange={(e) => handleSetValue(e.target.name, e.target.value)}
+                    onChange={(e) => handleSetValue(e)}
                 />
             </Styled.InputsGroup>
 
@@ -41,7 +43,7 @@ export function SigninForm() {
                     disabled={false}
                     type={"password"}
                     value={submitData.password}
-                    onChange={(e) => handleSetValue(e.target.name, e.target.value)}
+                    onChange={(e) => handleSetValue(e)}
                 />
             </Styled.InputsGroup>
 
