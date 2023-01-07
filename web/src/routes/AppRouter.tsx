@@ -1,12 +1,17 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { PrivateRoutes, PublicRoutes } from "./";
 
 
 export function AppRouter() {
-    const {isLoading, isAuthenticated} = useAuthContext();
+    const {isLoading, isAuthenticated, persistLogin} = useAuthContext();
 
-    if (status === 'checking') return <div className="loading">Checking credentials...</div>
+    if (isLoading) return <div>Checking credentials...</div>
+
+    useEffect(() => {
+        persistLogin();
+    }, [])
 
     return (
         <BrowserRouter>
