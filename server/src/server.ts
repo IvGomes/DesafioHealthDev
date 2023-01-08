@@ -1,9 +1,11 @@
 import express, {Request, Response, NextFunction} from 'express';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import "express-async-errors";
 import { routes } from './routes';
 
 
+dotenv.config()
 
 const app = express();
 
@@ -26,4 +28,4 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
 })
 
 
-app.listen(3000, () => console.log("🔥 server is running..."))
+app.listen(process.env.REACT_APP_PORT, () => console.log("🔥 server is running..."))

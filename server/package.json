@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --exit-child src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "npm run build && node build/src/server.js",
+    "migrate:prod": "npx prisma migrate deploy",
+    "start:prod": "npm run migrate:prod && npm run start"
   },
   "keywords": [],
   "author": "",
