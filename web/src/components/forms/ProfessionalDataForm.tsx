@@ -42,7 +42,7 @@ export function ProfessionalDataForm() {
                     principal="Informações Pessoais"
                     subtitle="Atualize seus dados profissionais aqui."
                 />
-                <EditButton text="Editar" />
+                <EditButton endPoint="/professionaldata" state={professionalFormData} text="Editar" />
             </StyledForms.Header>
 
             <StyledForms.RowLabelInputGroup>

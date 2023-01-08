@@ -69,6 +69,15 @@ export const readUserAddressData = async (authToken: string) => {
     .catch((error) => console.error(error))
 }
 
+export const readUserProfessionalData = async (authToken: string) => {
+  const headerAuthConfig = { headers: { Authorization: `Bearer ${authToken}` } }
+
+  return axiosServerApi
+    .get('/professionaldata', headerAuthConfig)
+    .then((response) => response.data)
+    .catch((error) => console.error(error))
+}
+
 export const updateUserData = async (
   authToken: string,
   endPoint: string,

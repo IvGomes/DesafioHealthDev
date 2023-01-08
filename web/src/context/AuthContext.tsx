@@ -58,6 +58,12 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
                         const userData = JSON.stringify(response);
                         sessionStorage.setItem('addressFormData', userData);
                     }).catch(error => console.error("addressCallThen:", error))
+
+                serverApi.readUserProfessionalData(data.token)
+                    .then(response => {
+                        const userData = JSON.stringify(response);
+                        sessionStorage.setItem('professionalFormData', userData);
+                    }).catch(error => console.error("professionalCallThen:", error))
             })
             .then(data => {
                 setIsAuthenticated(true)
