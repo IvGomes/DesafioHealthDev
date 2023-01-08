@@ -6,10 +6,12 @@ import { useGlobalContext } from "../context/GlobalContext";
 import { Icons } from "./Icons";
 import * as Styled from "../styles/components/AsideStyled";
 import { OpenMenuButton } from "./OpenMenuButton";
+import { useAuthContext } from "../context/AuthContext";
 
 
 export function Aside() {
     const { asideCollapse, generalFormData, professionalFormData } = useGlobalContext();
+    const {handleLogout} = useAuthContext();
 
     return (
         <aside>
@@ -51,7 +53,7 @@ export function Aside() {
                         <IconButton text="Notificações" icon={<Icons.Notification />} />
                         <IconButton text="Central de ajuda" icon={<Icons.Help />} />
                         <IconButton text="Configurações" icon={<Icons.Settings />} />
-                        <IconButton text="Sair" icon={<Icons.BackArrow />} />
+                        <IconButton handle={handleLogout} text="Sair" icon={<Icons.BackArrow />} />
                     </span>
                     <IconButton icon={<Icons.Chat />} isChatButton={true} />
                 </Styled.Nav>

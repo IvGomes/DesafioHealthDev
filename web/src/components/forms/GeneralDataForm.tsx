@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDragAndDropContext } from "../../context/DragAndDropContext";
 import { DragAndDropInput } from "../DragAndDropInput";
 import { Input } from "../Input";
@@ -16,6 +16,8 @@ export function GeneralDataForm() {
     const { handleDrag, handleDrop, dragActive, previewUrlAvatar } = useDragAndDropContext();
     const { generalFormData, setGeneralFormData, getValuesOnStorage } = useGlobalContext();
 
+    const [pageLoaded, setPageLoaded] = useState(false);
+
     const handlePersistFormData = ( name: any, value: any) => {
         setGeneralFormData(prevState => ({
             ...prevState,
@@ -24,8 +26,12 @@ export function GeneralDataForm() {
     }
 
     useEffect(() => {
-        getValuesOnStorage()
+        setPageLoaded(true);
     }, [])
+
+    useEffect(() => {
+        getValuesOnStorage()
+    }, [pageLoaded])
 
 
     return (
@@ -35,7 +41,7 @@ export function GeneralDataForm() {
                     principal="Informações Pessoais"
                     subtitle="Atualize sua foto e dados pessoais aqui."
                 />
-                <EditButton text="Editar" />
+                <EditButton state={generalFormData} endPoint={'/generaldata'} text="Editar" />
             </StyledForms.Header>
             <StyledForms.RowLabelInputGroup>
                 <Label title="Nome / Sobrenome" />

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../context/GlobalContext";
 import { EditButton } from "../EditButton";
 import { Input } from "../Input";
@@ -12,6 +12,8 @@ import * as StyledForms from './../../styles/components/forms/FormsCommon';
 export function AddressDataForm() {
     const { setAddressFormData, addressFormData, getValuesOnStorage } = useGlobalContext();
 
+    const [pageLoaded, setPageLoaded] = useState(false);
+
     const {
         getUfsAddress,
         ufs,
@@ -22,8 +24,12 @@ export function AddressDataForm() {
 
 
     useEffect(() => {
-        getUfsAddress()
+        setPageLoaded(true);
     }, [])
+    
+    useEffect(() => {
+        getValuesOnStorage()
+    }, [pageLoaded])
 
     const handlePersistFormData = (name: any, value: any) => {
         setAddressFormData(prevState => ({

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../Input";
 import { Label } from "../Label";
 import { TitleForm } from "../TitleForm";
@@ -12,6 +12,8 @@ import { useGlobalContext } from "../../context/GlobalContext";
 export function PasswordDataForm() {
     const {getValuesOnStorage, passwordFormData, setPasswordFormData} = useGlobalContext();
 
+    const [pageLoaded, setPageLoaded] = useState(false);
+    
     const handlePersistFormData = (name: any, value: any) => {
         setPasswordFormData(prevState => ({
             ...prevState,
@@ -20,8 +22,12 @@ export function PasswordDataForm() {
     }
 
     useEffect(() => {
-        getValuesOnStorage()
+        setPageLoaded(true);
     }, [])
+    
+    useEffect(() => {
+        getValuesOnStorage()
+    }, [pageLoaded])
 
     return (
         <form>

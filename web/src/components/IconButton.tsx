@@ -7,20 +7,21 @@ interface IconButtonProps {
     icon: ReactNode;
     text?: string;
     isChatButton?: boolean;
+    handle?: () => void;
 }
 
-export function IconButton({ icon, text, isChatButton }: IconButtonProps) {
+export function IconButton({ icon, text, isChatButton, handle }: IconButtonProps) {
     const {asideCollapse} = useGlobalContext()
 
     return (
         isChatButton ? (
-            <Styled.ButtonChat href="#">
+            <Styled.ButtonChat href={"#"}>
                 <Styled.Icon>
                     {icon}
                 </Styled.Icon>
             </Styled.ButtonChat>
         ) : (
-            <Styled.Button href="#">
+            <Styled.Button onClick={handle} href="#">
                 <Styled.Icon>
                     {icon}
                 </Styled.Icon>

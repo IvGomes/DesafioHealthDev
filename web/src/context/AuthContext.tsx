@@ -1,5 +1,4 @@
 import { createContext, FormEvent, ReactNode, useContext, useState } from "react";
-import { formatDistanceStrict } from 'date-fns';
 
 import * as serverApi from './../services/ServerApi';
 
@@ -13,6 +12,7 @@ interface AuthContextReturnProps {
     isLoading: boolean;
     handleLoginSubmit: (e: FormEvent, username: string, password: string) => void;
     persistLogin: () => void;
+    handleLogout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextReturnProps>({} as AuthContextReturnProps);
@@ -28,11 +28,10 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         if (fromStorage) {
             const parsedFromStorage: DataResponseAuthUser = JSON.parse(fromStorage);
 
-            if(parsedFromStorage.token) {
+            if (parsedFromStorage.token) {
                 setIsAuthenticated(true);
             }
         }
-
     }
 
     function handleLoginSubmit(e: FormEvent, username: string, password: string) {
@@ -42,9 +41,32 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         retornoLogin
             .then(data => {
                 if (data?.token) {
-                    setIsAuthenticated(true)
+                    return data
+                } else {
+                    throw 'Problemas durante tentativa de login'
                 }
             })
+            .then(data => {
+                serverApi.readUserGeneralData(data.token)
+                    .then(response => {
+                        const userData = JSON.stringify(response);
+                        sessionStorage.setItem('generalFormData', userData);
+                    })
+            })
+            .then(data => {
+                setIsAuthenticated(true)
+            })
+            .catch((error) => { console.error(error) })
+    }
+
+    function handleLogout() {
+        console.log("logout")
+        sessionStorage.removeItem("datalogin");
+        sessionStorage.removeItem("generalFormData");
+        sessionStorage.removeItem("addressFormData");
+        sessionStorage.removeItem("passwordFormData");
+        sessionStorage.removeItem("professionalFormData");
+        window.location.reload();
     }
 
 
@@ -53,7 +75,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
             isAuthenticated,
             isLoading,
             handleLoginSubmit,
-            persistLogin
+            persistLogin,
+            handleLogout
         }}>
             {children}
         </AuthContext.Provider>

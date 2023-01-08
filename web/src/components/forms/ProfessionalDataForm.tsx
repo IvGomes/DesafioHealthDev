@@ -1,18 +1,20 @@
+import { useEffect, useState } from "react";
+
 import { Input } from "../Input";
 import { Label } from "../Label";
 import { TitleForm } from "../TitleForm";
-import { Icons } from "../Icons";
 
 import * as StyledForms from './../../styles/components/forms/FormsCommon';
 import { SelectInput } from "../SelectInput";
 import { useGlobalContext } from "../../context/GlobalContext";
-import { useEffect } from "react";
 import { Switch } from "../Switch";
 import { EditButton } from "../EditButton";
 
 
 export function ProfessionalDataForm() {
     const { getUfsAddress, getValuesOnStorage, ufs, professionalFormData, setProfessionalFormData } = useGlobalContext();
+
+    const [pageLoaded, setPageLoaded] = useState(false);
 
     useEffect(() => {
         getUfsAddress()
@@ -26,8 +28,12 @@ export function ProfessionalDataForm() {
     }
 
     useEffect(() => {
-        getValuesOnStorage()
+        setPageLoaded(true);
     }, [])
+
+    useEffect(() => {
+        getValuesOnStorage()
+    }, [pageLoaded])
 
     return (
         <form>
@@ -47,7 +53,7 @@ export function ProfessionalDataForm() {
                         selectItensValues={["CRM"]}
                         initValue={professionalFormData.crm}
                         getValue={handlePersistFormData}
-                        />
+                    />
                     <SelectInput
                         inputName="ufConselho"
                         selectItensValues={ufs}
@@ -65,7 +71,7 @@ export function ProfessionalDataForm() {
                         type={"number"}
                         value={professionalFormData.numeroConselho}
                         onChange={(e) => handlePersistFormData(e.target.name, e.target.value)}
-                        />
+                    />
                 </StyledForms.InputsGroup>
             </StyledForms.RowLabelInputGroup>
 
