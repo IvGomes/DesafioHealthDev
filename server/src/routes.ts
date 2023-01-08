@@ -6,20 +6,33 @@ import { RegisterUserController } from './services/registerUser/RegisterUserCont
 import { CreateGeneralDataController } from './services/createGeneralData/CreateGeneralDataController';
 import { ReadGeneralDataController } from './services/readGeneralData/ReadGeneralDataController';
 import { UpdateGeneralDataController } from './services/updateGeneralData/UpdateGeneralDataController';
+import { ReadAddressDataController } from './services/readAddressData/ReadAddressController';
+import { UpdateAddressDataController } from './services/updateAddressData/UpdateAddressDataController';
+import { UpdateUserController } from './services/updateUser/UpdateUserController';
 
 const routes = Router();
 
 const registerUserController = new RegisterUserController();
+const updateUserController = new UpdateUserController();
 const authenticateUserController = new AuthenticateUserController();
+
 const createGeneralDataController = new CreateGeneralDataController();
 const readGeneralDataController = new ReadGeneralDataController();
 const updateGeneralDataController = new UpdateGeneralDataController();
 
+const readAddressDataController = new ReadAddressDataController();
+const updateAddressDataController = new UpdateAddressDataController();
+
+
 routes.post('/users', registerUserController.handle)
+routes.put('/users', verifyAuthenticateToken, updateUserController.handle)
 routes.post('/login', authenticateUserController.handle)
 
 routes.get('/generaldata', verifyAuthenticateToken, readGeneralDataController.handle)
 routes.post('/generaldata', verifyAuthenticateToken, createGeneralDataController.handle)
 routes.put('/generaldata', verifyAuthenticateToken, updateGeneralDataController.handle)
+
+routes.get('/addressdata', verifyAuthenticateToken, readAddressDataController.handle)
+routes.put('/addressdata', verifyAuthenticateToken, updateAddressDataController.handle)
 
 export { routes }

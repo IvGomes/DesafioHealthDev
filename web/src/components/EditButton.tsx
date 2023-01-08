@@ -9,7 +9,7 @@ import * as serverApi from './../services/ServerApi';
 
 interface EditButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     text: string;
-    endPoint: "/generaldata" | "/addressdata" | "/passworddata" | "/professionaldata";
+    endPoint: "/generaldata" | "/addressdata" | "/users" | "/professionaldata";
     state: any;
 }
 

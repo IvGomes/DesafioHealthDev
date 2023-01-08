@@ -22,14 +22,10 @@ export function AddressDataForm() {
         handleMunicipioSelectOnChange
     } = useGlobalContext();
 
-
     useEffect(() => {
-        setPageLoaded(true);
+        getUfsAddress()
     }, [])
-    
-    useEffect(() => {
-        getValuesOnStorage()
-    }, [pageLoaded])
+
 
     const handlePersistFormData = (name: any, value: any) => {
         setAddressFormData(prevState => ({
@@ -39,9 +35,12 @@ export function AddressDataForm() {
     }
 
     useEffect(() => {
-        getValuesOnStorage()
+        setPageLoaded(true);
     }, [])
-
+    
+    useEffect(() => {
+        getValuesOnStorage()
+    }, [pageLoaded])
 
     return (
         <form>
@@ -50,7 +49,7 @@ export function AddressDataForm() {
                     principal="Informações Pessoais"
                     subtitle="Atualize seu endereço aqui."
                 />
-                <EditButton text="Editar" />
+                <EditButton endPoint="/addressdata" state={addressFormData} text="Editar" />
             </StyledForms.Header>
 
             <StyledForms.RowLabelInputGroup>

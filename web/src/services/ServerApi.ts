@@ -53,10 +53,18 @@ export const registerUser = async (username: string, password: string) => {
 
 export const readUserGeneralData = async (authToken: string) => {
   const headerAuthConfig = { headers: { Authorization: `Bearer ${authToken}` } }
-  console.log('ReadOnLogin', headerAuthConfig)
 
   return axiosServerApi
     .get('/generaldata', headerAuthConfig)
+    .then((response) => response.data)
+    .catch((error) => console.error(error))
+}
+
+export const readUserAddressData = async (authToken: string) => {
+  const headerAuthConfig = { headers: { Authorization: `Bearer ${authToken}` } }
+
+  return axiosServerApi
+    .get('/addressdata', headerAuthConfig)
     .then((response) => response.data)
     .catch((error) => console.error(error))
 }
@@ -67,14 +75,32 @@ export const updateUserData = async (
   dataState: any,
 ) => {
   const headerAuthConfig = { headers: { Authorization: `Bearer ${authToken}` } }
+  const { password, username } = dataState
 
-  console.log('PUT', headerAuthConfig)
+  if (password) {
+    const hashPassword = md5(password);
 
-  axiosServerApi.put(endPoint, dataState, headerAuthConfig)
-    .then( response => response.data)
-    .then( response => toast.success("Informações salvas com sucesso") )
+    axiosServerApi
+      .put(endPoint, {password: hashPassword, username: username}, headerAuthConfig)
+      .then((response) => response.data)
+      .then((response) => toast.success('Informações salvas com sucesso'))
+      .catch((error) => {
+        toast.error('Não foi possível salvar as alterações...')
+        toast.warning(
+          'A sessão parece ter expirado... Por favor, faça login novamente!',
+        )
+      })
+    return
+  }
+
+  axiosServerApi
+    .put(endPoint, dataState, headerAuthConfig)
+    .then((response) => response.data)
+    .then((response) => toast.success('Informações salvas com sucesso'))
     .catch((error) => {
-      toast.error("Não foi possível salvar as alterações...")
-      toast.warning("A sessão parece ter expirado... Por favor, faça login novamente!")
+      toast.error('Não foi possível salvar as alterações...')
+      toast.warning(
+        'A sessão parece ter expirado... Por favor, faça login novamente!',
+      )
     })
 }

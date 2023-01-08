@@ -11,11 +11,15 @@ import { useGlobalContext } from "../../context/GlobalContext";
 
 export function PasswordDataForm() {
     const {getValuesOnStorage, passwordFormData, setPasswordFormData} = useGlobalContext();
+    const [userData, setUserData] = useState({
+        username: "",
+        password: ""
+    })
 
     const [pageLoaded, setPageLoaded] = useState(false);
     
     const handlePersistFormData = (name: any, value: any) => {
-        setPasswordFormData(prevState => ({
+        setUserData(prevState => ({
             ...prevState,
             [name]: value
         }))
@@ -36,24 +40,23 @@ export function PasswordDataForm() {
                     principal="Informações Pessoais"
                     subtitle="Atualize sua senha aqui."
                 />
-                <EditButton text="Mudar senha" />
+                <EditButton endPoint="/users" state={userData} text="Mudar senha" />
             </StyledForms.Header>
 
             <StyledForms.RowLabelInputGroup>
                 <Label title="Usuário / Senha" />
                 <StyledForms.InputsGroup templateColumns="1fr 1fr">
                     <Input
-                        name="password"
-                        type={"password"}
-                        value={passwordFormData.password}
+                        name="username"
+                        value={userData.username}
                         onChange={(e) => {handlePersistFormData(e.target.name, e.target.value)}}
                         />
                     <Input
-                        name="repeatPassword"
+                        name="password"
                         type={"password"}
                         setIcon={<Icons.locker />}
                         iconSize={15}
-                        value={passwordFormData.repeatPassword}
+                        value={userData.password}
                         onChange={(e) => {handlePersistFormData(e.target.name, e.target.value)}}
                     />
                 </StyledForms.InputsGroup>
