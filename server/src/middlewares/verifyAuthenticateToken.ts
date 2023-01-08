@@ -1,9 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { verify } from 'jsonwebtoken'
-
-interface PayloadProps {
-    sub: string;
-}
+import jwt from 'jsonwebtoken'
 
 export async function verifyAuthenticateToken(
   request: Request,
@@ -21,18 +17,17 @@ export async function verifyAuthenticateToken(
   const [, token] = authHeader.split(' ')
 
   try {
+    jwt.verify(token, 'valus', (error, decoded) => {
+      if (error) {
+        return response.status(401).send({ message: 'Token inválido' })
+      }
 
-    const { sub } = verify(token, 'valus') as PayloadProps;
-
-    request.userId = sub;
-
+      if(typeof decoded?.sub === 'string') return request.userId = decoded?.sub;
+    })
     return next()
-
   } catch (error) {
-
     return response.status(401).json({
       message: 'Token inválido ou expirado...',
     })
-    
   }
 }
