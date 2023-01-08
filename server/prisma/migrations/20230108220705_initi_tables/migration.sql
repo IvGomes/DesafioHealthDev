@@ -11,7 +11,7 @@ CREATE TABLE `users` (
 -- CreateTable
 CREATE TABLE `generalDatas` (
     `id` VARCHAR(191) NOT NULL,
-    `birth` DATETIME(3) NOT NULL,
+    `birth` VARCHAR(191) NOT NULL,
     `cns` VARCHAR(191) NOT NULL,
     `cpf` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
