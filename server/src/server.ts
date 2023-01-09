@@ -27,6 +27,6 @@ app.use(
   },
 )
 
-app.listen(process.env.REACT_APP_PORT, () =>
-  console.log(`🔥 server is running on port ${process.env.REACT_APP_PORT}...`),
+app.listen(process.env.PORT, () =>
+  console.log(`🔥 server is running on port ${process.env.PORT}...`),
 )
