@@ -3,7 +3,7 @@ import md5 from 'md5'
 import { toast } from 'react-toastify'
 
 const axiosServerApi = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_API_BASEURL_HEALTHDEV,
 })
 
 export const login = async (username: string, password: string) => {
