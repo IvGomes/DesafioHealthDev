@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDragAndDropContext } from "../../context/DragAndDropContext";
 import { DragAndDropInput } from "../DragAndDropInput";
 import { Input } from "../Input";
@@ -12,26 +12,37 @@ import * as Styled from './../../styles/components/forms/GeneralDataForm';
 import { EditButton } from "../EditButton";
 import { useGlobalContext } from '../../context/GlobalContext';
 
+import * as serverApi from './../../services/ServerApi';
+
 export function GeneralDataForm() {
     const { handleDrag, handleDrop, dragActive, previewUrlAvatar } = useDragAndDropContext();
-    const { generalFormData, setGeneralFormData, getValuesOnStorage } = useGlobalContext();
+    const { generalFormData, setGeneralFormData } = useGlobalContext();
 
-    const [pageLoaded, setPageLoaded] = useState(false);
-
-    const handlePersistFormData = ( name: any, value: any) => {
+    const handlePersistFormData = (name: any, value: any) => {
         setGeneralFormData(prevState => ({
             ...prevState,
             [name]: value
         }))
     }
 
-    useEffect(() => {
-        setPageLoaded(true);
-    }, [])
 
     useEffect(() => {
-        getValuesOnStorage()
-    }, [pageLoaded])
+        const gettedData = sessionStorage.getItem('datalogin');
+        if (gettedData) {
+            const parseGettedData = JSON.parse(gettedData);
+            const formData = serverApi.readUserGeneralData(parseGettedData.token);
+
+            formData
+                .then(response => {
+                    const userData = JSON.stringify(response);
+                    sessionStorage.setItem('generalFormData', userData);
+
+                    return response
+                }).then(data => {
+                    setGeneralFormData(data)
+                })
+        }
+    }, [])
 
 
     return (

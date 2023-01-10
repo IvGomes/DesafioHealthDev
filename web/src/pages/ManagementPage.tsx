@@ -34,11 +34,11 @@ export function ManagementPage() {
               <GeneralDataForm />
             </DragAndDropProvider>
           </Styled.TabsContent>
-          
+
           <Styled.TabsContent value='address'>
             <AddressDataForm />
           </Styled.TabsContent>
-          
+
           <Styled.TabsContent value='password'>
             <PasswordDataForm />
           </Styled.TabsContent>

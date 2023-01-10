@@ -47,25 +47,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
                 }
             })
             .then(data => {
-                serverApi.readUserGeneralData(data.token)
-                    .then(response => {
-                        const userData = JSON.stringify(response);
-                        sessionStorage.setItem('generalFormData', userData);
-                    }).catch(error => console.error("generalCallThen:", error))
-                    
-                serverApi.readUserAddressData(data.token)
-                    .then(response => {
-                        const userData = JSON.stringify(response);
-                        sessionStorage.setItem('addressFormData', userData);
-                    }).catch(error => console.error("addressCallThen:", error))
-
-                serverApi.readUserProfessionalData(data.token)
-                    .then(response => {
-                        const userData = JSON.stringify(response);
-                        sessionStorage.setItem('professionalFormData', userData);
-                    }).catch(error => console.error("professionalCallThen:", error))
-            })
-            .then(data => {
                 setIsAuthenticated(true)
             })
             .catch((error) => { console.error(error) })

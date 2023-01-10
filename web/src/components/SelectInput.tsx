@@ -17,7 +17,7 @@ export function SelectInput({ inputName, selectItensValues, handles, getValue, i
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(initValue);
 
-    const { onViewModeInput, generalFormData, addressFormData } = useGlobalContext();
+    const { onViewModeInput, generalFormData, addressFormData, professionalFormData } = useGlobalContext();
 
     if (handles) {
         useEffect(() => {
@@ -31,7 +31,7 @@ export function SelectInput({ inputName, selectItensValues, handles, getValue, i
 
     useEffect(() => {
         setValue(initValue)
-    }, [generalFormData, addressFormData])
+    }, [generalFormData, addressFormData, professionalFormData])
 
     return (
         <Styled.SelectRoot

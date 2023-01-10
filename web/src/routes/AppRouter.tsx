@@ -22,7 +22,7 @@ export function AppRouter() {
                         : <Route path='/*' element={<PublicRoutes />} />
                 }
 
-                <Route path='*' element={<Navigate to='/login' replace />} />
+                <Route path='*' element={<Navigate to='/index.html' replace />} />
             </Routes>
         </BrowserRouter>
     )

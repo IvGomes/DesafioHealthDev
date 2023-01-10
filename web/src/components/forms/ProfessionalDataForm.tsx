@@ -10,11 +10,12 @@ import { useGlobalContext } from "../../context/GlobalContext";
 import { Switch } from "../Switch";
 import { EditButton } from "../EditButton";
 
+import * as serverApi from './../../services/ServerApi';
+
 
 export function ProfessionalDataForm() {
-    const { getUfsAddress, getValuesOnStorage, ufs, professionalFormData, setProfessionalFormData } = useGlobalContext();
+    const { getUfsAddress, ufs, professionalFormData, setProfessionalFormData } = useGlobalContext();
 
-    const [pageLoaded, setPageLoaded] = useState(false);
 
     useEffect(() => {
         getUfsAddress()
@@ -28,12 +29,23 @@ export function ProfessionalDataForm() {
     }
 
     useEffect(() => {
-        setPageLoaded(true);
-    }, [])
+        const gettedData = sessionStorage.getItem('datalogin');
 
-    useEffect(() => {
-        getValuesOnStorage()
-    }, [pageLoaded])
+        if (gettedData) {
+            const parseGettedData = JSON.parse(gettedData);
+            const formData = serverApi.readUserProfessionalData(parseGettedData.token);
+
+            formData
+                .then(response => {
+                    const userData = JSON.stringify(response);
+                    sessionStorage.setItem('professionalFormData', userData);
+
+                    return response
+                }).then(data => {
+                    setProfessionalFormData(data);
+                })
+        }
+    }, [])
 
     return (
         <form>

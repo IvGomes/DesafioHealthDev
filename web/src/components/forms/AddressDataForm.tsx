@@ -8,11 +8,12 @@ import { TitleForm } from "../TitleForm";
 
 import * as StyledForms from './../../styles/components/forms/FormsCommon';
 
+import * as serverApi from './../../services/ServerApi';
+
 
 export function AddressDataForm() {
-    const { setAddressFormData, addressFormData, getValuesOnStorage } = useGlobalContext();
+    const { setAddressFormData, addressFormData } = useGlobalContext();
 
-    const [pageLoaded, setPageLoaded] = useState(false);
 
     const {
         getUfsAddress,
@@ -35,12 +36,23 @@ export function AddressDataForm() {
     }
 
     useEffect(() => {
-        setPageLoaded(true);
+        const gettedData = sessionStorage.getItem('datalogin');
+
+        if (gettedData) {
+            const parseGettedData = JSON.parse(gettedData);
+            const formData = serverApi.readUserAddressData(parseGettedData.token);
+
+            formData
+                .then(response => {
+                    const userData = JSON.stringify(response);
+                    sessionStorage.setItem('addressFormData', userData);
+
+                    return response
+                }).then(data => {
+                    setAddressFormData(data);
+                })
+        }
     }, [])
-    
-    useEffect(() => {
-        getValuesOnStorage()
-    }, [pageLoaded])
 
     return (
         <form>

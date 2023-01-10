@@ -10,13 +10,12 @@ import { useGlobalContext } from "../../context/GlobalContext";
 
 
 export function PasswordDataForm() {
-    const {getValuesOnStorage, passwordFormData, setPasswordFormData} = useGlobalContext();
+    const {passwordFormData, setPasswordFormData} = useGlobalContext();
     const [userData, setUserData] = useState({
         username: "",
         password: ""
     })
 
-    const [pageLoaded, setPageLoaded] = useState(false);
     
     const handlePersistFormData = (name: any, value: any) => {
         setUserData(prevState => ({
@@ -25,13 +24,6 @@ export function PasswordDataForm() {
         }))
     }
 
-    useEffect(() => {
-        setPageLoaded(true);
-    }, [])
-    
-    useEffect(() => {
-        getValuesOnStorage()
-    }, [pageLoaded])
 
     return (
         <form>

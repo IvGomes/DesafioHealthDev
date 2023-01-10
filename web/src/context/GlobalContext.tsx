@@ -65,7 +65,7 @@ interface GlobalReturnProps {
     getUfsAddress: () => void;
     handleMunicipioSelectOnChange: (val: string) => void;
     handleEditInfosOnForm: (e: FormEvent) => void;
-    getValuesOnStorage: () => void;
+    // getValuesOnStorage: () => void;
 }
 
 
@@ -152,31 +152,32 @@ export const GlobalProvider = ({ children }: GlobalContextProps) => {
         }
     }
 
-    function getValuesOnStorage() {
-        const dataGeneralData = sessionStorage.getItem("generalFormData");
-        if (dataGeneralData) {
-            const data = JSON.parse(dataGeneralData)
-            setGeneralFormData(data);
-        };
+    // async function getValuesOnStorage() {
+    //     const dataGeneralData = sessionStorage.getItem("generalFormData");
+    //     if (dataGeneralData) {
+    //         const data = JSON.parse(dataGeneralData)
+    //         setGeneralFormData(data);
+    //     };
 
-        const dataAddressData = sessionStorage.getItem("addressFormData");
-        if (dataAddressData) {
-            const data = JSON.parse(dataAddressData)
-            setAddressFormData(data);
-        };
+    //     const dataAddressData = sessionStorage.getItem("addressFormData");
+    //     if (dataAddressData) {
+    //         const data = JSON.parse(dataAddressData)
+    //         setAddressFormData(data);
+    //     };
 
-        const dataPasswordData = sessionStorage.getItem("passwordFormData");
-        if (dataPasswordData) {
-            const data = JSON.parse(dataPasswordData)
-            setPasswordFormData(data);
-        };
+    //     const dataPasswordData = sessionStorage.getItem("passwordFormData");
+    //     if (dataPasswordData) {
+    //         const data = JSON.parse(dataPasswordData)
+    //         setPasswordFormData(data);
+    //     };
 
-        const dataProfessionalData = sessionStorage.getItem("professionalFormData");
-        if (dataProfessionalData) {
-            const data = JSON.parse(dataProfessionalData)
-            setProfessionalFormData(data);
-        };
-    }
+    //     const dataProfessionalData = sessionStorage.getItem("professionalFormData");
+    //     if (dataProfessionalData) {
+    //         const data = JSON.parse(dataProfessionalData)
+    //         setProfessionalFormData(data);
+    //     };
+
+    // }
 
 
     return (
@@ -205,7 +206,7 @@ export const GlobalProvider = ({ children }: GlobalContextProps) => {
                 getUfsAddress,
                 handleMunicipioSelectOnChange,
                 handleEditInfosOnForm,
-                getValuesOnStorage
+                // getValuesOnStorage
             }}
         >
             {children}
