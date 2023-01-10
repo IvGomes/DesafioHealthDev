@@ -25,13 +25,13 @@ model User {
 model GeneralData {
   id       String @unique @default(uuid())
   birth    String
-  cns      String @unique
-  cpf      String @unique
-  email    String @unique
+  cns      String
+  cpf      String
+  email    String
   fullName String
   gender   String
-  phone    String @unique
-  rg       String @unique
+  phone    String
+  rg       String
 
   user   User   @relation(fields: [userId], references: [id])
   userId String
@@ -59,7 +59,7 @@ model ProfessionalData {
   crm            String
   especialidade  String
   idUser         String  @unique @default(cuid())
-  numeroConselho String  @unique
+  numeroConselho String
   rqe            String
   ufConselho     String
   memed          Boolean
