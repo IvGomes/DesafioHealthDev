@@ -58,7 +58,7 @@ model ProfessionalData {
   id             String  @unique @default(uuid())
   crm            String
   especialidade  String
-  idUser         String  @unique @default(uuid())
+  idUser         String
   numeroConselho String
   rqe            String
   ufConselho     String
