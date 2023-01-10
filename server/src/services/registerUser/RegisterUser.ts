@@ -11,7 +11,7 @@ export class RegisterUser {
     // Verificar se usuário existe...
     const userExist = await prisma.user.findFirst({
       where: {
-        username,
+        username: username,
       },
     })
 
@@ -25,7 +25,7 @@ export class RegisterUser {
     // Add DB
     const newUser = await prisma.user.create({
       data: {
-        username,
+        username: username,
         password: hashPassword,
         GeneralData: {
           create: {
